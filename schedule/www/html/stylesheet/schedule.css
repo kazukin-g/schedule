@@ -1,0 +1,75 @@
+body{
+    display: block;
+}
+
+.calendar{
+    float: left;
+    width: 60%;
+    margin-left: 10%;
+}
+
+.calendar h2{
+    text-align: center;
+    font-size: 4vw;
+    margin: 3% auto;
+}
+
+.month{
+    width: 60%;
+    margin: auto;
+    text-align: center;
+    border-collapse: collapse;
+    font-size: 3vw;
+}
+
+.month th, .month td{
+    width: 14%;
+    position: relative;
+    border: solid 1px black;
+}
+.month td::after{
+    content: "";
+    display: block;
+    margin-top: 100%;
+}
+.month th span, .month td label{
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.sanday{
+    background-color: lightcoral;
+}
+.saturaday{
+    background-color: lightskyblue;
+}
+
+.plans{
+    float: right;
+    width: 30%;
+}
+
+.plans h2{
+    font-size: 2.75vw;
+}
+
+.radio{
+    display: none;
+}
+
+.radio:checked + label{
+    color: darkred;
+    font-size: 125%;
+}
+
+
+.plan[type="checkbox"], div.plan, form.plan{
+    display: none;
+}
+.plan[type="checkbox"]:checked + .plan{
+    display: block;
+}

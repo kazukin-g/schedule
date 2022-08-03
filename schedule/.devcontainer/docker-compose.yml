@@ -1,0 +1,44 @@
+version: "3.7"
+
+services:
+  php:
+    build: 
+      context: ./../php
+      dockerfile: Dockerfile
+    container_name: "schedule_php"
+    volumes: 
+      - ./../www/html:/var/www/html/
+    depends_on:
+      - db
+    networks: 
+      - schedule_net
+
+  db:
+    image: mysql:5.7
+    container_name: "schedule_db"
+    ports: 
+      - "3306:3306"
+    environment: 
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "ol4m4_schedule"
+      MYSQL_USER: "ol4m4_schedule"
+      MYSQL_PASSWORD: "schedule@0501"
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes: 
+      - ./../sql/my.cnf:/etc/mysql/conf.d/my.cnf
+    networks:
+      - schedule_net
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: "schedule_pma"
+    ports:
+      - "8080:80"
+    depends_on: 
+      - db
+    networks:
+      - schedule_net
+
+networks: 
+  schedule_net:
+    driver: bridge
